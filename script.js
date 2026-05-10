@@ -19,7 +19,7 @@ particlesJS("particles-js", {
 
 // تأثير الكتابة للنص الرئيسي
 new TypeIt("#typewriter", {
-    strings: ["بوابة وزارة العدل"],
+    strings: ["بوابة رئاسة الحرس الملكي"],
     speed: 80,
     loop: true,
     cursor: false
