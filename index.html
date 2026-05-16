@@ -11,14 +11,15 @@
 
     <style>
         :root {
-            --bg-color: #0b110e;
-            --card-bg: #121c17;
-            --primary-green: #155734;
-            --light-green: #1b854a;
+            /* تعديل الألوان لتطابق الخلفية الخضراء العسكرية الداكنة الحقيقية المرفقة */
+            --bg-color: #061510; 
+            --card-bg: #0b1f18;
+            --primary-green: #114b2c;
+            --light-green: #196f41;
             --accent-green: #2ecc71;
             --text-main: #ffffff;
             --text-muted: #a2b3aa;
-            --border-color: #1c2e24;
+            --border-color: #163827;
         }
 
         * {
@@ -35,14 +36,14 @@
             overflow-x: hidden;
         }
 
-        /* شاشة الترحيب والدخول */
+        /* شاشة الترحيب والدخول المحدثة */
         #welcome-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #070c0a 0%, #111a15 100%);
+            background: #061510; /* نفس لون الخلفية في الصورة تماماً */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -61,76 +62,87 @@
             justify-content: center;
         }
 
-        /* حاوية دائرية للشعار */
+        /* تصميم الدائرة المتوهجة المحيطة بالشعار بدقة */
         .logo-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .logo-circle {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
-            background-color: #050d08;
-            border: 2px solid rgba(46, 204, 113, 0.3);
+            background: transparent;
+            border: 2px solid rgba(46, 204, 113, 0.4);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(21, 87, 52, 0.6);
+            box-shadow: 0 0 35px rgba(46, 204, 113, 0.25);
             position: relative;
         }
 
         .logo-circle img {
-            width: 90%;
-            height: 90%;
+            width: 85%;
+            height: 85%;
             object-fit: contain;
         }
 
         .welcome-title {
-            font-size: 2.6rem;
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             color: var(--text-main);
-        }
-
-        .welcome-desc {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 35px;
-        }
-
-        .btn-start {
-            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
-            color: white;
-            border: 2px solid rgba(255,255,255,0.1);
-            padding: 14px 50px;
-            font-size: 1.2rem;
-            font-weight: 650;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(21, 87, 52, 0.4);
-            transition: all 0.3s ease;
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
         }
 
-        .btn-start:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
-            border-color: var(--accent-green);
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            font-weight: bold;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
         }
 
-        /* شريط التنقل العلوي */
+        /* تعديل تصميم زر "ابدأ الآن" ليطابق الصورة */
+        .btn-start {
+            background: #114b2c;
+            color: white;
+            border: 1.5px solid #2ecc71;
+            padding: 12px 60px;
+            font-size: 1.3rem;
+            font-weight: 650;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(46, 204, 113, 0.6);
+            background: #155e37;
+        }
+
+        .browse-text {
+            color: #1b6f43;
+            font-size: 0.95rem;
+            margin-top: 50px;
+            cursor: pointer;
+        }
+
+        /* شريط التنقل العلوي - المحدث بجميع الأقسام الجديدة من لقطة شاشتك */
         .navbar {
-            background-color: #080d0b;
+            background-color: #050d0a;
             border-bottom: 1px solid var(--border-color);
-            padding: 15px 5%;
+            padding: 18px 3%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -145,11 +157,13 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 22px;
+            width: 100%;
+            justify-content: flex-start;
         }
 
         .nav-links a {
-            color: var(--text-muted);
+            color: #7a8b82;
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 600;
@@ -190,16 +204,15 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             transition: transform 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            border-color: #243e30;
+            border-color: #245239;
         }
 
-        /* تصميم قسم القيادة */
         .leader-item {
             display: flex;
             align-items: center;
@@ -220,7 +233,6 @@
             font-family: monospace;
         }
 
-        /* روابط ولوائح */
         .link-button {
             display: flex;
             align-items: center;
@@ -239,7 +251,6 @@
             background-color: var(--light-green);
         }
 
-        /* القوانين والمراجع */
         .list-numbered {
             list-style-type: none;
             counter-reset: my-counter;
@@ -271,9 +282,8 @@
             font-size: 0.9rem;
         }
 
-        /* قسم الحماية الخاص بالادارة */
         .admin-lock-zone {
-            background-color: #161109;
+            background-color: #1a150e;
             border: 1px dashed #d35400;
             border-radius: 12px;
             padding: 40px;
@@ -322,31 +332,32 @@
         <div class="welcome-content">
             <div class="logo-container">
                 <div class="logo-circle">
-                    <img src="https://i.postimg.co/g2m6p06j/edited-image.png" alt="شعار إدارة الشؤون العسكرية">
+                    <img src="https://i.ibb.co/VWVgGbyz/edited-image.png" alt="شعار إدارة الشؤون العسكرية">
                 </div>
             </div>
-            <h1 class="welcome-title">إدارة الشؤون العسكرية</h1>
-            <p class="welcome-desc">
-                هي الجهة المسؤولة عن تنظيم ومتابعة جميع الشؤون الإدارية والعسكرية، وتشمل مهامها الإشراف على اللوائح، ومعالجة طلبات المنسوبين، وضمان سير العمل وفق أعلى معايير الانضباط والكفاءة.
-            </p>
-            <button class="btn-start" onclick="enterSite()">ابدأ الآن <i class="fas fa-arrow-left"></i></button>
+            <h1 class="welcome-title">الشؤون العسكرية 📋</h1>
+            <div class="welcome-subtitle">KR</div>
+            <button class="btn-start" onclick="enterSite()">ابدأ الآن</button>
+            <div class="browse-text" onclick="enterSite()">↓ تصفح الأقسام</div>
         </div>
     </div>
 
     <nav class="navbar" id="site-nav">
-        <div class="logo-text" style="font-weight: 700; color: var(--accent-green);">الشؤون العسكرية</div>
         <ul class="nav-links">
             <li><a href="#" class="active">الرئيسية</a></li>
-            <li><a href="#leadership">القيادة</a></li>
-            <li><a href="#rules">اللوائح والقوانين</a></li>
-            <li><a href="#references">نظام المراجع</a></li>
-            <li><a href="#admin-zone">قسم الإدارة</a></li>
+            <li><a href="#sectors">القطاعات</a></li>
+            <li><a href="#current-military">العسكر الحاليين</a></li>
+            <li><a href="#announcements">الإعلانات</a></li>
+            <li><a href="#security-snap">السناب الأمني</a></li>
+            <li><a href="#track-request">تتبع طلبي</a></li>
+            <li><a href="#sectors-management">إدارة القطاعات</a></li>
+            <li><a href="#admin-zone">لوحة القيادة</a></li>
         </ul>
     </nav>
 
     <div class="main-content" id="main-site">
         
-        <section id="leadership">
+        <section id="current-military">
             <h2 class="section-title"><i class="fas fa-users-cog"></i> أسماء قيادة الدورة</h2>
             <div class="grid-container">
                 <div class="card" style="grid-column: 1 / -1;">
@@ -378,10 +389,10 @@
             </div>
         </section>
 
-        <section id="rules">
+        <section id="sectors">
             <div class="grid-container">
                 <div class="card">
-                    <h3 style="margin-bottom:15px; color:var(--accent-green);"><i class="fas fa-link"></i> اللوائح والروابط</h3>
+                    <h3 style="margin-bottom:15px; color:var(--accent-green);"><i class="fas fa-link"></i> اللوائح والروابط العامة</h3>
                     <a href="https://docs.google.com/spreadsheets/d/1GspU5Kdn48JEp0qcnNQxUgjBlrhTpYRx4b-XG2cQVTI/edit?usp=sharing" target="_blank" class="link-button">
                         <span>لائحة دورة الشؤون العسكرية</span> <i class="fas fa-file-excel"></i>
                     </a>
@@ -402,57 +413,18 @@
                         <li>يمنع طلب التعيين أو الترقية. جميع الترقيات والتعيينات تتم حسب التفاعل والكفاءة.</li>
                         <li>في حال وجود شكوى على إداري، تُرفع للنائب وللمسؤول مباشرة.</li>
                         <li>يمنع الجدال داخل الدورة، وفي حال وجود مشكلة يجب إبلاغ الإدارة فوراً.</li>
-                        <li>يمنع قبول أعمال أي شخص يملك إيقاف عسكري أو إعادة تأهيل أو إجازة وظيفية - مع التأكد من سريان إجازته.</li>
-                        <li>عند رفض أي عمل، يجب تنبيه الشخص المعني وتوضيح سبب الرفض في الشات الرسمي.</li>
-                        <li>يُمنع مراجعة أو تغيير قرار قبول أو رفض أي عمل تم التعامل معه مسبقاً من قبل فرد آخر.</li>
-                        <li>التغيب دون تفاعل لأكثر من أسبوع يؤدي إلى العقوبات الصارمة!</li>
                     </ul>
-                    <p style="color:#e74c3c; font-size:0.9rem; margin-top:15px; font-weight:bold;">تنويه: القوانين قابلة للتعديل في أي وقت من قبل إدارة الدورة.</p>
                 </div>
-            </div>
-        </section>
-
-        <section id="references">
-            <h2 class="section-title"><i class="fas fa-sitemap"></i> نظام المراجع الرسمية</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <h4>المرجع الأول</h4>
-                    <p style="color:var(--accent-green); font-weight:bold; margin:5px 0;">📋 إدارة الشؤون العسكرية</p>
-                    <p style="font-size:0.9rem; color:var(--text-muted);">تمثل الإدارة المرجع الأعلى وصاحبة القرار النهائي. جميع التعليمات والتوجيهات الصادرة عنها واجبة التنفيذ دون استثناء.</p>
-                </div>
-                <div class="card">
-                    <h4>المرجع الثاني</h4>
-                    <p style="color:var(--accent-green); font-weight:bold; margin:5px 0;">المشرف العام للإداريين</p>
-                    <p style="font-size:0.9rem; color:var(--text-muted);">يُعدّ المشرف لإدارة الشؤون العسكرية ومسؤول عن جميع تصرفاتهم، ويحق له محاسبتهم ولديه جميع الصلاحيات الإدارية.</p>
-                </div>
-                <div class="card">
-                    <h4>المرجع الثالث</h4>
-                    <p style="color:var(--accent-green); font-weight:bold; margin:5px 0;">مساعد مسؤول الشؤون العسكرية</p>
-                    <p style="font-size:0.9rem; color:var(--text-muted);">يكون بعد المسؤول ونائبه مباشرة، ولديه جميع الصلاحيات من بعد النائب. وفي حال عدم تواجدهما تكون لديه كامل صلاحيات المسؤول.</p>
-                </div>
-                <div class="card">
-                    <h4>المرجع الرابع</h4>
-                    <p style="color:var(--accent-green); font-weight:bold; margin:5px 0;">نائب مسؤول الشؤون العسكرية</p>
-                    <p style="font-size:0.9rem; color:var(--text-muted);">هو الداعم الأول للمسؤول وصاحب الصلاحيات المساعدة. يُرجع إليه في حال عدم توفر الإدارة، ويقوم بتنسيق المهام ومتابعة الالتزام.</p>
-                </div>
-                <div class="card">
-                    <h4>المرجع الخامس</h4>
-                    <p style="color:var(--accent-green); font-weight:bold; margin:5px 0;">مسؤول الشؤون العسكرية</p>
-                    <p style="font-size:0.9rem; color:var(--text-muted);">يُخدم كمرجع أخير (للحد من الإزعاج). تم وضعه في المرتبة الخامسة لعدم إشغاله بالرسائل، ويُرجى التواصل معه في الحالات المهمة فقط.</p>
-                </div>
-            </div>
-            <div class="card" style="background-color:#2c1a1a; border-color:#c0392b; margin-bottom:40px;">
-                <p style="color:#e74c3c; font-weight:bold;"><i class="fas fa-exclamation-triangle"></i> تنبيه: يُمنع تجاوز التسلسل الإداري أو تجاهل القوانين. المخالفة تُعرض صاحبها للإجراء المناسب.</p>
             </div>
         </section>
 
         <section id="admin-zone">
-            <h2 class="section-title"><i class="fas fa-lock"></i> نظام المستندات وقوانين الإدارة السرّية</h2>
+            <h2 class="section-title"><i class="fas fa-lock"></i> لوحة القيادة والمستندات السرّية</h2>
             
             <div class="admin-lock-zone" id="lock-screen">
                 <i class="fas fa-user-shield" style="font-size: 3rem; color: #d35400;"></i>
-                <h3 style="margin-top:10px;">هذا القسم مخصص للإدارة فقط</h3>
-                <p style="color:var(--text-muted); font-size:0.9rem;">الرجاء إدخال رمز التحقق الخاص بالإدارة لمشاهدة المستندات والقوانين.</p>
+                <h3 style="margin-top:10px;">هذا القسم مخصص لقيادة الدورة فقط</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem;">الرجاء إدخال رمز التحقق الخاص بالإدارة لمشاهدة المستندات والقوانين الخاصة.</p>
                 <input type="password" id="admin-password" class="input-code" placeholder="••••••">
                 <br>
                 <button class="btn-unlock" onclick="checkCode()">تحقق وفك القفل</button>
@@ -461,38 +433,10 @@
             <div class="secret-content" id="allowed-content">
                 <div class="grid-container">
                     <div class="card">
-                        <h3 style="color:#e67e22; margin-bottom:15px;"><i class="fas fa-folder-open"></i> القسم الخامس: مستندات وروابط إدارية</h3>
+                        <h3 style="color:#e67e22; margin-bottom:15px;"><i class="fas fa-folder-open"></i> روابط المستندات الإدارية</h3>
                         <a href="https://docs.google.com/spreadsheets/d/147sSHftO12djyuLpjtQE-g_PP_p9uvEc4f99TsIu5Vs/edit?usp=drivesdk" target="_blank" class="link-button" style="background-color:#d35400;">
                             <span>لائحة إدارة الشؤون العسكرية (الخاصة بالإدارة)</span> <i class="fas fa-file-excel"></i>
                         </a>
-                    </div>
-
-                    <div class="card" style="grid-column: span 2;">
-                        <h3 style="color:#e67e22; margin-bottom:15px;"><i class="fas fa-user-gavel"></i> القسم السادس: قوانين إدارة الشؤون العسكرية</h3>
-                        <ul class="list-numbered" style="--primary-green: #d35400;">
-                            <li>يجب احترام جميع الأفراد والضباط داخل الدورة.</li>
-                            <li>يُمنع منعاً باتاً قبول إجازته في حال منتهي رصيد إجازته.</li>
-                            <li>يُمنع استخدام صلاحياته بشكل خاطئ.</li>
-                            <li>يجب التركيز على الصورة في حال قبول عمله داخل الدورة.</li>
-                            <li>يُمنع منعاً باتاً الجدالات داخل إدارة الدورة، وفي حال وجود مشكلة يجب إبلاغ المسؤول ونائبه.</li>
-                            <li>في حال لديك (🔴 إيقاف عسكري) أو (⚫ إعادة تأهيل) أو (✈️ إجازة وظيفية) يُمنع حضور الاجتماعات أو الزيارة من مجلس الوزراء.</li>
-                            <li>يجب الإشراف على أعضاء الدورة في حال قبول أو رفض أي أعمال عسكرية أو مخالفات أو دفتر الحضور ويرجى تنبيهه داخل الدورة.</li>
-                            <li>يُمنع إنشاء اجتماعات إلا في حال وجود إذن مسبق من المسؤول ونائبه.</li>
-                            <li>يجب عليك الالتزام بالعقوبات والهيكل الإداري داخل لائحة الدورة.</li>
-                            <li>يُمنع منعاً باتاً الحقد على أي شخص، ورفض الأعمال بسبب الحقد يؤدي إلى الإعفاء المباشر.</li>
-                            <li>يُمنع منعاً باتاً قبول عمل في الدورة وهو غير مستحق، وسيتم محاسبة الفاعل وإعفائه من منصبه.</li>
-                            <li>يجب عليك التفاعل في هذا الأسبوع، وفي حال التغيب دون عذر لمدة أسبوع سيتم التنبيه، أما التغيب لأسبوعين دون عذر يؤدي للإعفاء المباشر.</li>
-                            <li>في حال تم رفض عمل لـ سجل الشؤون العسكرية دون ذكر السبب في الشات الرسمي سيتم المحاسبة.</li>
-                            <li>يجب الاستماع لأوامر المسؤول ونائبه وعدم مخالفتها.</li>
-                            <li>يُمنع منعاً باتاً إنشاء قانون أو نظام داخل الدورة دون إذن من المسؤول ونائبه.</li>
-                            <li>يُمنع التعديل على العقوبات والهيكل الإداري والقوانين داخل لائحة الدورة دون إذن المسؤول ونائبه.</li>
-                            <li>يُمنع منعاً باتاً إضافة قانون ورتب داخل الدورة دون إذن من المسؤول.</li>
-                            <li>يجب إرسال تقارير أسبوعية لمسؤول الشؤون العسكرية ومساعده، ويرجى عدم التأخير.</li>
-                            <li>أقصى حد لقبول إجازات أعضاء الدورة 7 أيام، وفقط المسؤول ونائبه يحق لهما قبول إجازات حتى 14 يوماً.</li>
-                            <li>في حال إنشاء تصويت يجب أخذ الإذن من المسؤول ونائبه أولاً.</li>
-                            <li>يرجى عدم إزعاج ومنشن مسؤول الدورة ونائبه، وفي حال التكرار سوف تتم المحاسبة.</li>
-                            <li>يُمنع منعاً باتاً تعديل لائحة الدورة إلا في حال وجود إذن من المسؤول.</li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -528,7 +472,7 @@
             const correctCode = "292107";
 
             if (codeInput === correctCode) {
-                alert("تم التحقق بنجاح، مرحباً بك.");
+                alert("تم التحقق بنجاح، مرحباً بك في لوحة القيادة الدورة.");
                 lockScreen.style.display = 'none';
                 allowedContent.style.display = 'block';
             } else {
