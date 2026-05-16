@@ -4,482 +4,242 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إدارة الشؤون العسكرية</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;650;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
-        :root {
-            /* تعديل الألوان لتطابق الخلفية الخضراء العسكرية الداكنة الحقيقية المرفقة */
-            --bg-color: #061510; 
-            --card-bg: #0b1f18;
-            --primary-green: #114b2c;
-            --light-green: #196f41;
-            --accent-green: #2ecc71;
-            --text-main: #ffffff;
-            --text-muted: #a2b3aa;
-            --border-color: #163827;
-        }
-
+        /* --- التنسيقات العامة للموقع --- */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
-            scroll-behavior: smooth;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* حركة نزول ناعمة وانسيابية */
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
+            background-color: #050d08; /* لون الخلفية الزيتية الغامقة نفس الصور */
+            background-image: radial-gradient(circle at center, #0a1f14 0%, #050d08 100%);
+            color: #ffffff;
+            min-height: 100vh;
         }
 
-        /* شاشة الترحيب والدخول المحدثة */
-        #welcome-screen {
+        /* --- شريط التنقل العلوي (Navbar) --- */
+        .navbar {
+            background-color: rgba(6, 14, 9, 0.95);
             position: fixed;
             top: 0;
-            left: 0;
+            right: 0;
             width: 100%;
-            height: 100%;
-            background: #061510; /* نفس لون الخلفية في الصورة تماماً */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: all 0.6s ease-in-out;
-        }
-
-        .welcome-content {
-            text-align: center;
-            max-width: 600px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* تصميم الدائرة المتوهجة المحيطة بالشعار بدقة */
-        .logo-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .logo-circle {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: transparent;
-            border: 2px solid rgba(46, 204, 113, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            box-shadow: 0 0 35px rgba(46, 204, 113, 0.25);
-            position: relative;
-        }
-
-        .logo-circle img {
-            width: 85%;
-            height: 85%;
-            object-fit: contain;
-        }
-
-        .welcome-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .welcome-subtitle {
-            font-size: 1.1rem;
-            color: var(--accent-green);
-            font-weight: bold;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
-
-        /* تعديل تصميم زر "ابدأ الآن" ليطابق الصورة */
-        .btn-start {
-            background: #114b2c;
-            color: white;
-            border: 1.5px solid #2ecc71;
-            padding: 12px 60px;
-            font-size: 1.3rem;
-            font-weight: 650;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .btn-start:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(46, 204, 113, 0.6);
-            background: #155e37;
-        }
-
-        .browse-text {
-            color: #1b6f43;
-            font-size: 0.95rem;
-            margin-top: 50px;
-            cursor: pointer;
-        }
-
-        /* شريط التنقل العلوي - المحدث بجميع الأقسام الجديدة من لقطة شاشتك */
-        .navbar {
-            background-color: #050d0a;
-            border-bottom: 1px solid var(--border-color);
-            padding: 18px 3%;
+            z-index: 1000;
+            border-bottom: 1px solid #112d1d;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease-in-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 22px;
-            width: 100%;
-            justify-content: flex-start;
-        }
-
-        .nav-links a {
-            color: #7a8b82;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-green);
-        }
-
-        /* محتوى الموقع الأساسي */
-        .main-content {
-            opacity: 0;
-            display: none;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            transition: opacity 0.8s ease-out;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            border-right: 5px solid var(--light-green);
-            padding-right: 15px;
-            color: #e2e8f0;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin-bottom: 50px;
         }
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #245239;
-        }
-
-        .leader-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: rgba(255,255,255,0.02);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border-right: 3px solid var(--light-green);
-        }
-
-        .discord-tag {
-            background-color: #5865F2;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            font-family: monospace;
-        }
-
-        .link-button {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: var(--primary-green);
-            color: white;
+        .nav-links li a {
+            color: #8fa095;
             text-decoration: none;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 12px;
+            font-size: 15px;
             font-weight: 600;
-            transition: background 0.3s;
+            padding: 6px 12px;
+            transition: all 0.3s ease;
         }
 
-        .link-button:hover {
-            background-color: var(--light-green);
+        /* تأثير التمرير والروابط النشطة باللون الأخضر العسكري الفاتح */
+        .nav-links li a:hover, .nav-links li a.active-box {
+            color: #1cc88a;
         }
 
-        .list-numbered {
-            list-style-type: none;
-            counter-reset: my-counter;
+        /* --- القسم الرئيسي الترحيبي (Hero Section) --- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 60px 20px;
+            min-height: 85vh;
         }
 
-        .list-numbered li {
-            counter-increment: my-counter;
-            position: relative;
-            padding-right: 45px;
-            margin-bottom: 15px;
-            line-height: 1.6;
-            color: var(--text-muted);
-        }
-
-        .list-numbered li::before {
-            content: counter(my-counter);
-            position: absolute;
-            right: 0;
-            top: 2px;
-            background-color: var(--primary-green);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        .logo-container {
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(28, 200, 138, 0.1) 0%, rgba(0,0,0,0) 70%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 0.9rem;
+            margin-bottom: 25px;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(28, 200, 138, 0.05);
         }
 
-        .admin-lock-zone {
-            background-color: #1a150e;
-            border: 1px dashed #d35400;
+        .logo-container img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero .subtitle {
+            color: #1cc88a;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+        }
+
+        /* تصميم زر ابدأ الآن المطابق للصور */
+        .btn-start {
+            background-color: #11693f;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 45px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 30px;
+            border: 1px solid #1cc88a;
+            box-shadow: 0 0 15px rgba(28, 200, 138, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-start:hover {
+            background-color: #1cc88a;
+            box-shadow: 0 0 25px rgba(28, 200, 138, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .scroll-down {
+            margin-top: 50px;
+            color: #8fa095;
+            font-size: 14px;
+            text-decoration: none;
+            animation: bounce 2s infinite;
+        }
+
+        /* --- الحاوية وتنسيق الأقسام المطلوبة تحت --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 100px 20px;
+        }
+
+        .military-section {
+            background-color: #09140e;
+            border: 1px solid #122d1e;
             border-radius: 12px;
             padding: 40px;
-            text-align: center;
-            margin-top: 40px;
+            margin-bottom: 40px;
+            scroll-margin-top: 100px; /* تمنع اختفاء العنوان تحت الـ Navbar عند النزول */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        .input-code {
-            background-color: #0b0d0c;
-            border: 1px solid #d35400;
-            color: white;
-            padding: 12px;
-            font-size: 1.2rem;
-            text-align: center;
-            border-radius: 8px;
-            margin-top: 15px;
-            width: 200px;
-            letter-spacing: 3px;
+        .military-section:hover {
+            border-color: #1cc88a;
+            transform: translateY(-3px);
         }
 
-        .btn-unlock {
-            background-color: #d35400;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: bold;
+        .military-section h2 {
+            color: #1cc88a;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #122d1e;
+            padding-bottom: 12px;
         }
 
-        .secret-content {
-            display: none;
-            animation: fadeIn 1s forwards;
+        .military-section p {
+            color: #b3c3b9;
+            line-height: 1.8;
+            font-size: 16px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* أنميشن خفيف لزر التصفح */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
         }
     </style>
 </head>
 <body>
 
-    <div id="welcome-screen">
-        <div class="welcome-content">
-            <div class="logo-container">
-                <div class="logo-circle">
-                    <img src="https://i.ibb.co/VWVgGbyz/edited-image.png" alt="شعار إدارة الشؤون العسكرية">
-                </div>
-            </div>
-            <h1 class="welcome-title">الشؤون العسكرية 📋</h1>
-            <div class="welcome-subtitle">KR</div>
-            <button class="btn-start" onclick="enterSite()">ابدأ الآن</button>
-            <div class="browse-text" onclick="enterSite()">↓ تصفح الأقسام</div>
-        </div>
-    </div>
-
     <nav class="navbar" id="site-nav">
+        <div class="navbar-brand">
+            <img src="edited-image.png" alt="شعار">
+        </div>
         <ul class="nav-links">
-            <li><a href="#" class="active">الرئيسية</a></li>
-            <li><a href="#sectors">القطاعات</a></li>
-            <li><a href="#current-military">العسكر الحاليين</a></li>
-            <li><a href="#announcements">الإعلانات</a></li>
-            <li><a href="#security-snap">السناب الأمني</a></li>
-            <li><a href="#track-request">تتبع طلبي</a></li>
-            <li><a href="#sectors-management">إدارة القطاعات</a></li>
-            <li><a href="#admin-zone">لوحة القيادة</a></li>
+            <li><a href="#" class="active-box">الرئيسية</a></li>
+            <li><a href="#course-leadership">أسماء قيادة الدورة</a></li>
+            <li><a href="#general-regulations">اللوائح والروابط العامة</a></li>
+            <li><a href="#course-laws">قوانين دورة الشؤون العسكرية</a></li>
+            <li><a href="#special-documents">قيادة دورة والمستندات الخاصة</a></li>
         </ul>
     </nav>
 
-    <div class="main-content" id="main-site">
+    <header class="hero">
+        <div class="logo-container">
+            <img src="edited-image.png" alt="شعار إدارة الشؤون العسكرية">
+        </div>
+        <h1>الشؤون العسكرية</h1>
+        <div class="subtitle">KR</div>
         
-        <section id="current-military">
-            <h2 class="section-title"><i class="fas fa-users-cog"></i> أسماء قيادة الدورة</h2>
-            <div class="grid-container">
-                <div class="card" style="grid-column: 1 / -1;">
-                    <div class="leader-item">
-                        <div><strong>مسؤول الشؤون العسكرية:</strong> عبدالله العتيبي</div>
-                        <span class="discord-tag"><i class="fab fa-discord"></i> 0p_a</span>
-                    </div>
-                    <div class="leader-item" style="border-right-color: #7f8c8d;">
-                        <div><strong>نائب مسؤول الشؤون العسكرية:</strong> لا يوجد</div>
-                        <span class="discord-tag" style="background-color: #7f8c8d;">-</span>
-                    </div>
-                    <div class="leader-item">
-                        <div><strong>مساعد مسؤول الشؤون العسكرية:</strong> نواف الحكمي</div>
-                        <span class="discord-tag"><i class="fab fa-discord"></i> nawaf8203</span>
-                    </div>
-                    <div class="leader-item">
-                        <div><strong>إدارة الشؤون العسكرية:</strong> سعود الظفيري</div>
-                        <span class="discord-tag"><i class="fab fa-discord"></i> aas1122120368</span>
-                    </div>
-                    <div class="leader-item">
-                        <div><strong>إدارة الشؤون العسكرية:</strong> خالد الاسمري</div>
-                        <span class="discord-tag"><i class="fab fa-discord"></i> khalid9556</span>
-                    </div>
-                    <div class="leader-item">
-                        <div><strong>إدارة الشؤون العسكرية:</strong> مفرح العسيري</div>
-                        <span class="discord-tag"><i class="fab fa-discord"></i> cx7m</span>
-                    </div>
-                </div>
-            </div>
+        <a href="#course-leadership" class="btn-start">ابدأ الآن</a>
+        
+        <a href="#course-leadership" class="scroll-down">تصفح الأقسام</a>
+    </header>
+
+    <div class="container">
+
+        <section id="course-leadership" class="military-section">
+            <h2>أسماء قيادة الدورة</h2>
+            <p>هذا القسم مخصص لعرض كشف أسماء القادة والمسؤولين والمساعدين في إدارة الشؤون العسكرية المشرفين على منسوبي الدورة ومهامهم.</p>
         </section>
 
-        <section id="sectors">
-            <div class="grid-container">
-                <div class="card">
-                    <h3 style="margin-bottom:15px; color:var(--accent-green);"><i class="fas fa-link"></i> اللوائح والروابط العامة</h3>
-                    <a href="https://docs.google.com/spreadsheets/d/1GspU5Kdn48JEp0qcnNQxUgjBlrhTpYRx4b-XG2cQVTI/edit?usp=sharing" target="_blank" class="link-button">
-                        <span>لائحة دورة الشؤون العسكرية</span> <i class="fas fa-file-excel"></i>
-                    </a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBVz6vIeKZe5eiiM-cHhYzz_CSakApg-QW02ahE_xWbus6Rg/viewform" target="_blank" class="link-button">
-                        <span>طلب ترقية دورة الشؤون العسكرية</span> <i class="fas fa-file-alt"></i>
-                    </a>
-                </div>
-
-                <div class="card" style="grid-column: span 2;">
-                    <h3 style="margin-bottom:15px; color:var(--accent-green);"><i class="fas fa-gavel"></i> قوانين دورة الشؤون العسكرية</h3>
-                    <ul class="list-numbered">
-                        <li>احترام جميع منسوبي الدورة من أفراد وضباط.</li>
-                        <li>الالتزام بجميع أنظمة الدورة، وأي مخالفة تُعرضك للملاحظة أو الإعفاء.</li>
-                        <li>يمنع قبول أي عمل أو دفتر حضور خاص بك.</li>
-                        <li>يمنع قبول أي عمل غير مستحق، والعقوبة تكون إعفاء مباشر.</li>
-                        <li>عدم التدقيق أو الإهمال في مراجعة الأعمال يؤدي إلى الإعفاء.</li>
-                        <li>يمنع رفض الأعمال بدافع شخصي أو الحقد.</li>
-                        <li>يمنع طلب التعيين أو الترقية. جميع الترقيات والتعيينات تتم حسب التفاعل والكفاءة.</li>
-                        <li>في حال وجود شكوى على إداري، تُرفع للنائب وللمسؤول مباشرة.</li>
-                        <li>يمنع الجدال داخل الدورة، وفي حال وجود مشكلة يجب إبلاغ الإدارة فوراً.</li>
-                    </ul>
-                </div>
-            </div>
+        <section id="general-regulations" class="military-section">
+            <h2>اللوائح والروابط العامة</h2>
+            <p>هنا تتوفر جميع الروابط الرقمية الهامة والمنصات التابعة، إلى جانب لوائح وأنظمة ترقية دورة الشؤون العسكرية والتعاميم المعتمدة.</p>
         </section>
 
-        <section id="admin-zone">
-            <h2 class="section-title"><i class="fas fa-lock"></i> لوحة القيادة والمستندات السرّية</h2>
-            
-            <div class="admin-lock-zone" id="lock-screen">
-                <i class="fas fa-user-shield" style="font-size: 3rem; color: #d35400;"></i>
-                <h3 style="margin-top:10px;">هذا القسم مخصص لقيادة الدورة فقط</h3>
-                <p style="color:var(--text-muted); font-size:0.9rem;">الرجاء إدخال رمز التحقق الخاص بالإدارة لمشاهدة المستندات والقوانين الخاصة.</p>
-                <input type="password" id="admin-password" class="input-code" placeholder="••••••">
-                <br>
-                <button class="btn-unlock" onclick="checkCode()">تحقق وفك القفل</button>
-            </div>
-
-            <div class="secret-content" id="allowed-content">
-                <div class="grid-container">
-                    <div class="card">
-                        <h3 style="color:#e67e22; margin-bottom:15px;"><i class="fas fa-folder-open"></i> روابط المستندات الإدارية</h3>
-                        <a href="https://docs.google.com/spreadsheets/d/147sSHftO12djyuLpjtQE-g_PP_p9uvEc4f99TsIu5Vs/edit?usp=drivesdk" target="_blank" class="link-button" style="background-color:#d35400;">
-                            <span>لائحة إدارة الشؤون العسكرية (الخاصة بالإدارة)</span> <i class="fas fa-file-excel"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <section id="course-laws" class="military-section">
+            <h2>قوانين دورة الشؤون العسكرية</h2>
+            <p>يحتوي هذا القسم على ضوابط السلوك العسكري، الالتزام بأنظمة الدورة، وقوانين الانضباط العسكري التي يجب على الأفراد والضباط التقيد بها تماماً.</p>
         </section>
+
+        <section id="special-documents" class="military-section">
+            <h2>قيادة دورة والمستندات الخاصة</h2>
+            <p>منصة النماذج، التقارير السرية، والمستندات الرسمية الخاصة بقيادة الإدارة والتي تتطلب صلاحيات وصول محددة للاطلاع عليها.</p>
+        </section>
+
     </div>
 
-    <script>
-        function enterSite() {
-            const welcomeScreen = document.getElementById('welcome-screen');
-            const mainSite = document.getElementById('main-site');
-            const siteNav = document.getElementById('site-nav');
-            
-            welcomeScreen.style.opacity = '0';
-            welcomeScreen.style.pointerEvents = 'none';
-            
-            setTimeout(() => {
-                welcomeScreen.style.display = 'none';
-                mainSite.style.display = 'block';
-                siteNav.style.visibility = 'visible';
-                siteNav.style.opacity = '1';
-                
-                setTimeout(() => {
-                    mainSite.style.opacity = '1';
-                }, 50);
-            }, 600);
-        }
-
-        function checkCode() {
-            const codeInput = document.getElementById('admin-password').value;
-            const lockScreen = document.getElementById('lock-screen');
-            const allowedContent = document.getElementById('allowed-content');
-            
-            const correctCode = "292107";
-
-            if (codeInput === correctCode) {
-                alert("تم التحقق بنجاح، مرحباً بك في لوحة القيادة الدورة.");
-                lockScreen.style.display = 'none';
-                allowedContent.style.display = 'block';
-            } else {
-                alert("الرمز السري خاطئ! يرجى التأكد والمحاولة مرة أخرى.");
-                document.getElementById('admin-password').value = "";
-            }
-        }
-    </script>
 </body>
 </html>
