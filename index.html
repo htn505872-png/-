@@ -4,242 +4,431 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إدارة الشؤون العسكرية</title>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;650;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* --- التنسيقات العامة للموقع --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            /* درجات الأخضر العسكري الزيتي المأخوذة من لقطة الشاشة بدقة */
+            --bg-color: #05140e; 
+            --card-bg: #091f16;
+            --primary-green: #11432a;
+            --light-green: #195d3c;
+            --accent-green: #2ecc71;
+            --text-main: #ffffff;
+            --text-muted: #8fa096;
+            --border-color: #123324;
         }
 
-        html {
-            scroll-behavior: smooth; /* حركة نزول ناعمة وانسيابية */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #050d08; /* لون الخلفية الزيتية الغامقة نفس الصور */
-            background-image: radial-gradient(circle at center, #0a1f14 0%, #050d08 100%);
-            color: #ffffff;
-            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        /* --- شريط التنقل العلوي (Navbar) --- */
-        .navbar {
-            background-color: rgba(6, 14, 9, 0.95);
+        /* شاشة الترحيب والدخول المطابقة للمثال */
+        #welcome-screen {
             position: fixed;
             top: 0;
-            right: 0;
+            left: 0;
             width: 100%;
-            z-index: 1000;
-            border-bottom: 1px solid #112d1d;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar-brand img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        .nav-links li a {
-            color: #8fa095;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            padding: 6px 12px;
-            transition: all 0.3s ease;
-        }
-
-        /* تأثير التمرير والروابط النشطة باللون الأخضر العسكري الفاتح */
-        .nav-links li a:hover, .nav-links li a.active-box {
-            color: #1cc88a;
-        }
-
-        /* --- القسم الرئيسي الترحيبي (Hero Section) --- */
-        .hero {
+            height: 100%;
+            background-color: var(--bg-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 140px 20px 60px 20px;
-            min-height: 85vh;
+            z-index: 9999;
+            transition: all 0.6s ease-in-out;
         }
 
-        .logo-container {
-            width: 220px;
-            height: 220px;
-            background: radial-gradient(circle, rgba(28, 200, 138, 0.1) 0%, rgba(0,0,0,0) 70%);
+        .welcome-content {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 25px;
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(28, 200, 138, 0.05);
         }
 
-        .logo-container img {
-            width: 180px;
-            height: 180px;
+        /* حاوية الشعار الدائرية المتوهجة بالأخضر */
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-circle {
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(46, 204, 113, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 0 35px rgba(46, 204, 113, 0.2);
+        }
+
+        .logo-circle img {
+            width: 85%;
+            height: 85%;
             object-fit: contain;
         }
 
-        .hero h1 {
-            font-size: 42px;
+        .welcome-title {
+            font-size: 3.2rem;
             font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+            color: var(--text-main);
         }
 
-        .hero .subtitle {
-            color: #1cc88a;
-            font-size: 16px;
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-green);
             font-weight: bold;
             margin-bottom: 35px;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
-        /* تصميم زر ابدأ الآن المطابق للصور */
+        /* تصميم زر ابدأ الآن المطابق للمثال تماماً */
         .btn-start {
-            background-color: #11693f;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 45px;
-            font-size: 18px;
-            font-weight: 600;
+            background-color: #0f3d26;
+            color: white;
+            border: 1.5px solid #2ecc71;
+            padding: 12px 55px;
+            font-size: 1.25rem;
+            font-weight: 650;
             border-radius: 30px;
-            border: 1px solid #1cc88a;
-            box-shadow: 0 0 15px rgba(28, 200, 138, 0.2);
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
             transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn-start:hover {
-            background-color: #1cc88a;
-            box-shadow: 0 0 25px rgba(28, 200, 138, 0.4);
             transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(46, 204, 113, 0.5);
+            background-color: #145233;
         }
 
-        .scroll-down {
-            margin-top: 50px;
-            color: #8fa095;
-            font-size: 14px;
+        .browse-text {
+            color: #1a593a;
+            font-size: 0.95rem;
+            margin-top: 45px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* محتوى الموقع الأساسي */
+        .main-content {
+            opacity: 0;
+            display: none;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            transition: opacity 0.8s ease-out;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            border-right: 5px solid var(--light-green);
+            padding-right: 15px;
+            color: #e2e8f0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #1b4934;
+        }
+
+        .leader-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(255,255,255,0.01);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-right: 3px solid var(--light-green);
+        }
+
+        .discord-tag {
+            background-color: #5865F2;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--primary-green);
+            color: white;
             text-decoration: none;
-            animation: bounce 2s infinite;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            transition: background 0.3s;
         }
 
-        /* --- الحاوية وتنسيق الأقسام المطلوبة تحت --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px 100px 20px;
+        .link-button:hover {
+            background-color: var(--light-green);
         }
 
-        .military-section {
-            background-color: #09140e;
-            border: 1px solid #122d1e;
+        .list-numbered {
+            list-style-type: none;
+            counter-reset: my-counter;
+        }
+
+        .list-numbered li {
+            counter-increment: my-counter;
+            position: relative;
+            padding-right: 45px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .list-numbered li::before {
+            content: counter(my-counter);
+            position: absolute;
+            right: 0;
+            top: 2px;
+            background-color: var(--primary-green);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .admin-lock-zone {
+            background-color: #16120b;
+            border: 1px dashed #d35400;
             border-radius: 12px;
             padding: 40px;
-            margin-bottom: 40px;
-            scroll-margin-top: 100px; /* تمنع اختفاء العنوان تحت الـ Navbar عند النزول */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            text-align: center;
+            margin-top: 40px;
         }
 
-        .military-section:hover {
-            border-color: #1cc88a;
-            transform: translateY(-3px);
+        .input-code {
+            background-color: #0b0d0c;
+            border: 1px solid #d35400;
+            color: white;
+            padding: 12px;
+            font-size: 1.2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 15px;
+            width: 200px;
+            letter-spacing: 3px;
         }
 
-        .military-section h2 {
-            color: #1cc88a;
-            font-size: 24px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #122d1e;
-            padding-bottom: 12px;
+        .btn-unlock {
+            background-color: #d35400;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
         }
 
-        .military-section p {
-            color: #b3c3b9;
-            line-height: 1.8;
-            font-size: 16px;
+        .secret-content {
+            display: none;
+            animation: fadeIn 1s forwards;
         }
 
-        /* أنميشن خفيف لزر التصفح */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-            60% { transform: translateY(-4px); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar" id="site-nav">
-        <div class="navbar-brand">
-            <img src="edited-image.png" alt="شعار">
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="logo-container">
+                <div class="logo-circle">
+                    <img src="data:image/png;base64,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ثل" alt="شعار إدارة الشؤون العسكرية">
+                </div>
+            </div>
+            <h1 class="welcome-title">الشؤون العسكرية 📋</h1>
+            <div class="welcome-subtitle">KR</div>
+            <button class="btn-start" onclick="enterSite()">ابدأ الآن</button>
+            <div class="browse-text" onclick="enterSite()">↓ تصفح الأقسام العامة</div>
         </div>
-        <ul class="nav-links">
-            <li><a href="#" class="active-box">الرئيسية</a></li>
-            <li><a href="#course-leadership">أسماء قيادة الدورة</a></li>
-            <li><a href="#general-regulations">اللوائح والروابط العامة</a></li>
-            <li><a href="#course-laws">قوانين دورة الشؤون العسكرية</a></li>
-            <li><a href="#special-documents">قيادة دورة والمستندات الخاصة</a></li>
-        </ul>
-    </nav>
-
-    <header class="hero">
-        <div class="logo-container">
-            <img src="edited-image.png" alt="شعار إدارة الشؤون العسكرية">
-        </div>
-        <h1>الشؤون العسكرية</h1>
-        <div class="subtitle">KR</div>
-        
-        <a href="#course-leadership" class="btn-start">ابدأ الآن</a>
-        
-        <a href="#course-leadership" class="scroll-down">تصفح الأقسام</a>
-    </header>
-
-    <div class="container">
-
-        <section id="course-leadership" class="military-section">
-            <h2>أسماء قيادة الدورة</h2>
-            <p>هذا القسم مخصص لعرض كشف أسماء القادة والمسؤولين والمساعدين في إدارة الشؤون العسكرية المشرفين على منسوبي الدورة ومهامهم.</p>
-        </section>
-
-        <section id="general-regulations" class="military-section">
-            <h2>اللوائح والروابط العامة</h2>
-            <p>هنا تتوفر جميع الروابط الرقمية الهامة والمنصات التابعة، إلى جانب لوائح وأنظمة ترقية دورة الشؤون العسكرية والتعاميم المعتمدة.</p>
-        </section>
-
-        <section id="course-laws" class="military-section">
-            <h2>قوانين دورة الشؤون العسكرية</h2>
-            <p>يحتوي هذا القسم على ضوابط السلوك العسكري، الالتزام بأنظمة الدورة، وقوانين الانضباط العسكري التي يجب على الأفراد والضباط التقيد بها تماماً.</p>
-        </section>
-
-        <section id="special-documents" class="military-section">
-            <h2>قيادة دورة والمستندات الخاصة</h2>
-            <p>منصة النماذج، التقارير السرية، والمستندات الرسمية الخاصة بقيادة الإدارة والتي تتطلب صلاحيات وصول محددة للاطلاع عليها.</p>
-        </section>
-
     </div>
 
+    <div class="main-content" id="main-site">
+        
+        <section id="current-military">
+            <h2 class="section-title"><i class="fas fa-users-cog"></i> أسماء قيادة الدورة والعسكر الحاليين</h2>
+            <div class="grid-container">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <div class="leader-item">
+                        <div><strong>مسؤول الشؤون العسكرية:</strong> عبدالله العتيبي</div>
+                        <span class="discord-tag"><i class="fab fa-discord"></i> 0p_a</span>
+                    </div>
+                    <div class="leader-item" style="border-right-color: #7f8c8d;">
+                        <div><strong>نائب مسؤول الشؤون العسكرية:</strong> لا يوجد</div>
+                        <span class="discord-tag" style="background-color: #7f8c8d;">-</span>
+                    </div>
+                    <div class="leader-item">
+                        <div><strong>مساعد مسؤول الشؤون العسكرية:</strong> نواف الحكمي</div>
+                        <span class="discord-tag"><i class="fab fa-discord"></i> nawaf8203</span>
+                    </div>
+                    <div class="leader-item">
+                        <div><strong>إدارة الشؤون العسكرية:</strong> سعود الظفيري</div>
+                        <span class="discord-tag"><i class="fab fa-discord"></i> aas1122120368</span>
+                    </div>
+                    <div class="leader-item">
+                        <div><strong>إدارة الشؤون العسكرية:</strong> خالد الاسمري</div>
+                        <span class="discord-tag"><i class="fab fa-discord"></i> khalid9556</span>
+                    </div>
+                    <div class="leader-item">
+                        <div><strong>إدارة الشؤون العسكرية:</strong> مفرح العسيري</div>
+                        <span class="discord-tag"><i class="fab fa-discord"></i> cx7m</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sectors">
+            <div class="grid-container">
+                <div class="card">
+                    <h3 style="margin-bottom:15px; color:var(--accent-green);"><i class="fas fa-link"></i> اللوائح والروابط الرسمية</h3>
+                    <a href="https://docs.google.com/spreadsheets/d/1GspU5Kdn48JEp0qcnNQxUgjBlrhTpYRx4b-XG2cQVTI/edit?usp=sharing" target="_blank" class="link-button">
+                        <span>لائحة دورة الشؤون العسكرية</span> <i class="fas fa-file-excel"></i>
+                    </a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBVz6vIeKZe5eiiM-cHhYzz_CSakApg-QW02ahE_xWbus6Rg/viewform" target="_blank" class="link-button">
+                        <span>طلب ترقية دورة الشؤون العسكرية</span> <i class="fas fa-file-alt"></i>
+                    </a>
+                </div>
+
+                <div class="card" style="grid-column: span 2;">
+                    <h3 style="margin-bottom:15px; color:var(--accent-green);"><i class="fas fa-gavel"></i> قوانين دورة الشؤون العسكرية</h3>
+                    <ul class="list-numbered">
+                        <li>احترام جميع منسوبي الدورة من أفراد وضباط.</li>
+                        <li>الالتزام بجميع أنظمة الدورة، وأي مخالفة تُعرضك للملاحظة أو الإعفاء.</li>
+                        <li>يمنع قبول أي عمل أو دفتر حضور خاص بك.</li>
+                        <li>يمنع قبول أي عمل غير مستحق، والعقوبة تكون إعفاء مباشر.</li>
+                        <li>عدم التدقيق أو الإهمال في مراجعة الأعمال يؤدي إلى الإعفاء.</li>
+                        <li>يمنع رفض الأعمال بدافع شخصي أو الحقد.</li>
+                        <li>يمنع طلب التعيين أو الترقية. جميع الترقيات والتعيينات تتم حسب التفاعل والكفاءة.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="announcements" style="margin-bottom: 40px;"></section>
+        <section id="security-snap" style="margin-bottom: 40px;"></section>
+        <section id="track-request" style="margin-bottom: 40px;"></section>
+        <section id="sectors-management" style="margin-bottom: 40px;"></section>
+
+        <section id="admin-zone">
+            <h2 class="section-title"><i class="fas fa-lock"></i> لوحة القيادة والمستندات السرّية</h2>
+            
+            <div class="admin-lock-zone" id="lock-screen">
+                <i class="fas fa-user-shield" style="font-size: 3rem; color: #d35400;"></i>
+                <h3 style="margin-top:10px;">هذا القسم مخصص للإدارة العليا فقط</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem;">الرجاء إدخال رمز التحقق الخاص بالإدارة لمشاهدة المستندات والقوانين الخاصة.</p>
+                <input type="password" id="admin-password" class="input-code" placeholder="••••••">
+                <br>
+                <button class="btn-unlock" onclick="checkCode()">تحقق وفك القفل</button>
+            </div>
+
+            <div class="secret-content" id="allowed-content">
+                <div class="grid-container">
+                    <div class="card">
+                        <h3 style="color:#e67e22; margin-bottom:15px;"><i class="fas fa-folder-open"></i> روابط المستندات الإدارية</h3>
+                        <a href="https://docs.google.com/spreadsheets/d/147sSHftO12djyuLpjtQE-g_PP_p9uvEc4f99TsIu5Vs/edit?usp=drivesdk" target="_blank" class="link-button" style="background-color:#d35400;">
+                            <span>لائحة إدارة الشؤون العسكرية (الخاصة بالإدارة)</span> <i class="fas fa-file-excel"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function enterSite() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const mainSite = document.getElementById('main-site');
+            
+            welcomeScreen.style.opacity = '0';
+            welcomeScreen.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                mainSite.style.display = 'block';
+                
+                setTimeout(() => {
+                    mainSite.style.opacity = '1';
+                }, 50);
+            }, 600);
+        }
+
+        function checkCode() {
+            const codeInput = document.getElementById('admin-password').value;
+            const lockScreen = document.getElementById('lock-screen');
+            const allowedContent = document.getElementById('allowed-content');
+            
+            const correctCode = "292107";
+
+            if (codeInput === correctCode) {
+                alert("تم التحقق بنجاح، مرحباً بك في لوحة القيادة.");
+                lockScreen.style.display = 'none';
+                allowedContent.style.display = 'block';
+            } else {
+                alert("الرمز السري خاطئ! يرجى التأكد والمحاولة مرة أخرى.");
+                document.getElementById('admin-password').value = "";
+            }
+        }
+    </script>
 </body>
 </html>
