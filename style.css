@@ -1,0 +1,240 @@
+/* إعدادات الخطوط والصفحة العامة */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    background-color: #060b08; /* أسود عسكري داكن مائل للأخضر */
+    color: #ffffff;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* الواجهة الرئيسية للشعار (Hero) */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: radial-gradient(circle at center, #0a1a10 0%, #060b08 70%);
+}
+
+/* الدائرة المضيئة الخاصة بالشعار */
+.logo-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 2px solid #00a859;
+    box-shadow: 0 0 25px rgba(0, 168, 89, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #000;
+    margin-bottom: 25px;
+}
+
+.server-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.main-description {
+    max-width: 650px;
+    font-size: 1.05rem;
+    color: #a0a5a2;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.start-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #127344;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(18, 115, 68, 0.4);
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+    background-color: #1b945a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(27, 148, 90, 0.6);
+}
+
+/* الصناديق والأقسام المشتركة */
+.section-box {
+    background-color: #09110d;
+    border: 1px solid #13241b;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.section-title {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-right: 4px solid #127344;
+    padding-right: 10px;
+}
+
+.text-green {
+    color: #00a859;
+    border-right-color: #00a859;
+}
+
+/* تنسيق قائمة القيادة */
+.cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0d1a13;
+    border: 1px solid #183023;
+    padding: 15px 20px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.card-item:hover {
+    background-color: #11241a;
+}
+
+.card-item.no-one {
+    opacity: 0.6;
+}
+
+.role-text {
+    font-size: 1.05rem;
+    color: #cbd5e1;
+}
+
+.role-text strong {
+    color: #ffffff;
+}
+
+.discord-tag {
+    background-color: #5865f2;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.card-item.no-one .discord-tag {
+    background-color: #475569;
+}
+
+/* تنسيق قسمين سفليين (Grid) */
+.grid-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .grid-bottom {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* تنسيق القوانين */
+.rules-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.rules-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+.rule-num {
+    background-color: #00a859;
+    color: #000;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+/* تنسيق الروابط واللوائح */
+.links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.link-btn {
+    display: flex;
+    align-items: center;
+    background-color: #0e2216;
+    border: 1px solid #1b442b;
+    color: #fff;
+    text-decoration: none;
+    padding: 18px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.link-btn:hover {
+    background-color: #12331f;
+    border-color: #00a859;
+    transform: scale(1.01);
+}
+
+.icon-left {
+    font-size: 1.4rem;
+    color: #00a859;
+    margin-left: 15px;
+}
